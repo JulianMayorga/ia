@@ -10,15 +10,15 @@
                 var x = [2, 1];
                 var h = 6;
                 var resultado = ia.activacion(w, x, h);
-                expect(resultado).toBe(true);
+                expect(resultado).toBe(1);
             });
 
-            it('deberia devolver falso si valores no superan umbral', function () {
+            it('deberia devolver 0 si valores no superan umbral', function () {
                 var w = [2, 3];
                 var x = [2, 1];
                 var h = 9;
                 var resultado = ia.activacion(w, x, h);
-                expect(resultado).toBe(false);
+                expect(resultado).toBe(0);
             });
 
         });
@@ -38,6 +38,31 @@
                 var resultado = [3,8];
                 expect(ia.productoPunto(arreglo1, arreglo2)).toEqual(resultado);
             });
+        });
+
+        describe('Perceptron', function () {
+            it('NAND', function () {
+                var ejemplos = [
+                    //x0 es cte = 1
+                    [1, 0, 0],
+                    [1, 0, 1],
+                    [1, 1, 0],
+                    [1, 1, 1],
+                ];
+                var esperado = [
+                    1,
+                    1,
+                    1,
+                    0
+                ];
+                var pesos = [0, 0, 0];
+                var resultado = [0.8, -0.2, -0.1];
+                var tasa = 0.1;
+                var umbral = 0.5;
+                expect(ia.perceptron(ejemplos, esperado, tasa, umbral, pesos)).toEqual(resultado);
+            });
+
+            // Deberia recibir todos los argumentos
         });
     });
 }());
