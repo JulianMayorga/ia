@@ -75,6 +75,12 @@
             return resultado;
         };
 
+        ia.sigmoidea = function (t) {
+            var potencia = Math.pow(Math.E, (-1*t));
+            var denominador = 1 + potencia;
+            return Math.round10((1 / denominador), -1);
+        };
+
         return ia;
 
     });

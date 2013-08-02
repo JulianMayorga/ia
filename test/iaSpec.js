@@ -89,6 +89,22 @@
                 expect(resultado.iteraciones[1]).toEqual([0.4, 0, 0]);
             });
         });
+
+        describe('Function sigmoidea', function () {
+            it('sigmoidea(0)=0.5', function () {
+                var t = 0;
+                expect(ia.sigmoidea(t)).toEqual(0.5);
+            });
+            it('sigmoidea(10)=1', function () {
+                var t = 10;
+                expect(ia.sigmoidea(t)).toEqual(1);
+            });
+            it('sigmoidea(-10)=0', function () {
+                var t = -10;
+                expect(ia.sigmoidea(t)).toEqual(0);
+            });
+        });
+
     });
 }());
 
