@@ -56,13 +56,38 @@
                     0
                 ];
                 var pesos = [0, 0, 0];
-                var resultado = [0.8, -0.2, -0.1];
+                var pesos_finales = [0.8, -0.2, -0.1];
                 var tasa = 0.1;
                 var umbral = 0.5;
-                expect(ia.perceptron(ejemplos, esperado, tasa, umbral, pesos)).toEqual(resultado);
+                expect(ia.perceptron(ejemplos, esperado, tasa, umbral, pesos).pesos).toEqual(pesos_finales);
+
             });
 
             // Deberia recibir todos los argumentos
+            it('deberia devolver estadisticas', function () {
+                var ejemplos = [
+                    //x0 es cte = 1
+                    [1, 0, 0],
+                    [1, 0, 1],
+                    [1, 1, 0],
+                    [1, 1, 1],
+                ];
+                var esperado = [
+                    1,
+                    1,
+                    1,
+                    0
+                ];
+                var pesos = [0, 0, 0];
+                var total_iteraciones = 8;
+                var tasa = 0.1;
+                var umbral = 0.5;
+                var resultado = ia.perceptron(ejemplos, esperado, tasa, umbral, pesos);
+                expect(resultado.total_iteraciones).toEqual(total_iteraciones);
+                expect(resultado.iteraciones).toBeDefined();
+                expect(Array.isArray(resultado.iteraciones)).toBe(true);
+                expect(resultado.iteraciones[1]).toEqual([0.4, 0, 0]);
+            });
         });
     });
 }());

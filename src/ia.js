@@ -35,40 +35,44 @@
             var salida = [];
             var variacion = [];
             var _error;
+            var resultado = {};
+            var iteracion = 0;
+            var iteraciones = [];
             var that = this;
             var calculoPeso = function (elemento, indice, arreglo) {
             };
             var procesarEjemplo = function (elemento, indice, arreglo) {
+                iteraciones[iteracion] = [];
                 // Calcular la salida de cada elemento del ejemplo
                 salida[indice] = that.activacion(pesos, elemento, umbral);
                 // Para cada elemento del ejemplo, calcular variacion de vector peso
                 _error = esperado[indice] - salida[indice];
                 elemento.forEach(function (element, index, array) {
+                    iteraciones[iteracion][index] = [];
                     // Calcular variacion
                     variacion[index] = tasa * _error * element;
                     // Actualizar cada peso al sumarle la variacion
                     pesos[index] += variacion[index];
+                    iteraciones[iteracion][index] = pesos[index];
                 });
             };
 
-            var iteracion = 0;
-
             while(_error !== 0) {
-                console.log('------------------ iteracion ' + iteracion + ' ------------------');
-                iteracion += 1;
                 // Procesar cada ejemplo
                 ejemplos.forEach(procesarEjemplo);
-                console.log('w = [' + pesos + ']');
+                iteracion += 1;
             }
+
             // Redondear el vector peso final
             pesos.forEach(function (element, index, array) {
                 pesos[index] = Math.round10(element, -1);
             });
 
-            console.log('------------------ final  ------------------');
-            console.log('Resultado: w = [' + pesos + ']');
+            resultado.pesos = pesos;
+            resultado.total_iteraciones = iteracion;
+            resultado.iteraciones = iteraciones;
 
-            return pesos;
+            return resultado;
         };
 
         return ia;
