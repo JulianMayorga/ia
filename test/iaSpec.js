@@ -41,7 +41,9 @@
         });
 
         describe('Perceptron', function () {
+
             it('NAND', function () {
+                // Fuente: http://en.wikipedia.org/wiki/Perceptron#Example
                 var ejemplos = [
                     //x0 es cte = 1
                     [1, 0, 0],
@@ -60,7 +62,6 @@
                 var tasa = 0.1;
                 var umbral = 0.5;
                 expect(ia.perceptron(ejemplos, esperado, tasa, umbral, pesos).pesos).toEqual(pesos_finales);
-
             });
 
             // Deberia recibir todos los argumentos
